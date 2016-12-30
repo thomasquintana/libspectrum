@@ -24,7 +24,7 @@ ENV.Library(
   LIBS=['ippcore', 'ipps']
 )
 
-# Build and run the unit tests.
+# Build the unit tests.
 ENV.Object('tests/spectrograph_tests.cpp')
 ENV.Object('tests/test_runner.cpp')
 ENV.Object('tests/vector_tests.cpp')
