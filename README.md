@@ -44,3 +44,9 @@ Once, `libspectrum` is compiled run the unit tests.
 ```
 $] tests/test_runner
 ```
+
+### Generating the Docs
+
+```
+$] doxygen Doxyfile
+```
