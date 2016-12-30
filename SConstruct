@@ -36,5 +36,3 @@ ENV.Program(
   ],
   LIBS=['gtest', 'pthread', 'spectrograph', 'ipps', 'ippcore']
 )
-
-#ENV.Execute('tests/spectrograph_tests')

@@ -19,7 +19,7 @@
 
 /** @file spectrograph.h
  *  @brief Public functions, macros and type definitions used for
- *         generating log power spectrums.
+ *         generating spectrograms.
  *
  *  @author Thomas Quintana (quintana.thomas@gmail.com)
  *  @bug No known bugs.
@@ -54,8 +54,6 @@ typedef struct spectrograph spectrograph_t;
 /**
  * Create a new spectrograph.
  *
- * @param n_samples The number of samples per frame. It must be a power of 2.
- *
  * @return A pointer to a new spectrograph.
  */
 spectrograph_t* spectrograph_create(void);
@@ -72,12 +70,10 @@ void            spectrograph_destroy(spectrograph_t *sg);
  *
  * @param sg A spectrograph.
  *
- * @param input A pointer to an array of integers. The length must be equal
- *              to the input length expected by the spectrograph.
+ * @param input A pointer to an array of floats of length 128. 
  *
  * @param output A pointer to an array of floats which will store the resulting
- *               spectrogram fragment output. The output size is equal to 
- *               floor(l / 2) + 1 where l is the input length.
+ *               spectrogram fragment. The output will be of length 64 + 1.
  *
  * @return Void.
  */
