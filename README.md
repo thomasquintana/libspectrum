@@ -31,7 +31,7 @@ Finally, inform the dynamic loader of our new libraries by running the following
 $] sudo ldconfig
 ```
 
-### Compiling libspectrum (Static)
+### Compiling libspectrum (Static Library)
 
 ```
 $] git clone https://github.com/thomasquintana/libspectrum.git
