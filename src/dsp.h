@@ -19,7 +19,7 @@
 
 /** @file dsp.h
  *  @brief Public type and function definitions used for
- *         digital signal processing.
+ *         manipulating vectors.
  *
  *  @author Thomas Quintana (quintana.thomas@gmail.com)
  *  @bug No known bugs.
