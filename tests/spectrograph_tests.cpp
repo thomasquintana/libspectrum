@@ -55,11 +55,11 @@ float SINE_WAVE_SPECTRUM[] = {
 };
 
 TEST(spectrograph_tests, spectrograph_sine_wave_test) {
-  float *memory = (float*)malloc(sizeof(float) * 8000 * 2);
+  float *memory = (float*)malloc(sizeof(float) * 128 * 2);
   if (memory) {
     float *sine_wave_buffer = memory;
-    float *output_buffer = &memory[8000];
-    for (unsigned int idx = 0; idx < 8000; idx++) {
+    float *output_buffer = &memory[128];
+    for (unsigned int idx = 0; idx < 128; idx++) {
       sine_wave_buffer[idx] = (float)SINE_WAVE_GEN(idx);
     }
     spectrograph_t *spectrograph = spectrograph_create();
