@@ -18,8 +18,8 @@
  */
 
 /** @file dsp.h
- *  @brief Public type and function definitions used for
- *         manipulating vectors.
+ *  @brief Public functions, macros and types used for
+ *         digital signal processing.
  *
  *  @author Thomas Quintana (quintana.thomas@gmail.com)
  *  @bug No known bugs.
@@ -29,67 +29,11 @@
 #define DSP_H
 
 /**
- * Compute the Hanning Window function.
+ * Compute the Hann function.
  *
- * @param t The index at time t.
- * @param l The number of samples per frame.
+ * @param n The index at time t.
+ * @param N The number of samples per frame.
  */
-#define dsp_hann_wnd(t, l) (0.5 * (1 - cos((2 * M_PI * (t)) / ((l) - 1))))
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-/**
- * Add two vectors of 64 floats.
- *
- * @param a The first term.
- * @param b The second term.
- * @param c The destination for the sum of a + b.
- *
- * @return Void
- */
-void dsp_vec_add_64(float *a, float *b, float *c);
-
-/**
- * Copy a vector of 16 floats.
- *
- * @param a The source.
- * @param b The destination.
- *
- * @return Void
- */
-void dsp_vec_copy_16(float *a, float *b);
-
-/**
- * Multiply two vectors of 64 floats.
- *
- * @param a The first term.
- * @param b The second term.
- * @param c The destination for the product of a * b.
- *
- * @return Void
- */
-void dsp_vec_mul_64(float *a, float *b, float *c);
-
-/**
- * Compute the square root of each float in a vector of 64 floats.
- *
- * @param a The source.
- * @param b The destination for the square roots of 64 floats.
- */
-void dsp_vec_sqrt_64(float *a, float *b);
-
-/**
- * Compute the square of each float in a vector of 64 floats.
- *
- * @param a The source.
- * @param b The destination for the square of the 64 floats.
- */
-void dsp_vec_square_64(float *a, float *b);
-
-#ifdef __cplusplus
-}
-#endif
+#define hann_func(n, N) (0.5 * (1 - cos((2 * M_PI * (n)) / ((N) - 1))))
 
 #endif /* DSP_H */

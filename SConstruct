@@ -13,26 +13,26 @@ ENV = Environment(
 )
 
 # Build the library.
-ENV.Object('src/dsp.c')
 ENV.Object('src/spectrograph.c')
+ENV.Object('src/vector.c')
 ENV.Library(
   'spectrograph',
   [
-    'src/dsp.o',
-    'src/spectrograph.o'
+    'src/spectrograph.o',
+    'src/vector.o'
   ],
   LIBS=['ippcore', 'ipps']
 )
 
 # Build and run the unit tests.
-ENV.Object('tests/dsp_tests.cpp')
 ENV.Object('tests/spectrograph_tests.cpp')
 ENV.Object('tests/test_runner.cpp')
+ENV.Object('tests/vector_tests.cpp')
 ENV.Program(
   [
     'tests/test_runner.o',
-    'tests/dsp_tests.o',
-    'tests/spectrograph_tests.o'
+    'tests/spectrograph_tests.o',
+    'tests/vector_tests.o'
   ],
   LIBS=['gtest', 'pthread', 'spectrograph', 'ipps', 'ippcore']
 )

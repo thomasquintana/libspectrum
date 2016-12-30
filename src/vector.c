@@ -17,8 +17,8 @@
  * under the License.
  */
 
-/** @file dsp.c
- *  @brief Implements the dsp interface.
+/** @file vector.c
+ *  @brief Implements the vector interface.
  *
  *  @author Thomas Quintana (quintana.thomas@gmail.com)
  *  @bug No known bugs.
@@ -26,9 +26,9 @@
 
 #include <complex.h>
 
-#include "dsp.h"
+#include "vector.h"
 
-inline void dsp_vec_add_64(float *a, float *b, float *c) {
+inline void vec_add_64(float *a, float *b, float *c) {
   __asm__(
     "vmovaps (%0), %%ymm0\n\t"
     "vmovaps (%1), %%ymm1\n\t"
@@ -70,7 +70,7 @@ inline void dsp_vec_add_64(float *a, float *b, float *c) {
   );
 }
 
-inline void dsp_vec_copy_16(float *a, float *b) {
+inline void vec_copy_16(float *a, float *b) {
   __asm__(
     "prefetchnta 64(%0)\n\t"
     "movq (%0), %%mm0\n\t"
@@ -95,7 +95,7 @@ inline void dsp_vec_copy_16(float *a, float *b) {
   );
 }
 
-inline void dsp_vec_mul_64(float *a, float *b, float *c) {
+inline void vec_mul_64(float *a, float *b, float *c) {
   __asm__(
     "vmovaps (%0), %%ymm0\n\t"
     "vmovaps (%1), %%ymm1\n\t"
@@ -137,7 +137,7 @@ inline void dsp_vec_mul_64(float *a, float *b, float *c) {
   );
 }
 
-inline void dsp_vec_sqrt_64(float *a, float *b) {
+inline void vec_sqrt_64(float *a, float *b) {
   __asm__(
     "vmovaps (%0), %%ymm0\n\t"
     "vsqrtps %%ymm0, %%ymm1\n\t"
@@ -171,7 +171,7 @@ inline void dsp_vec_sqrt_64(float *a, float *b) {
   );
 }
 
-inline void dsp_vec_square_64(float *a, float *b) {
+inline void vec_square_64(float *a, float *b) {
   __asm__(
     "vmovaps (%0), %%ymm0\n\t"
     "vmovaps (%0), %%ymm1\n\t"

@@ -17,7 +17,7 @@
  * under the License.
  */
 
-/** @file dsp_tests.cpp
+/** @file vector_tests.cpp
  *  @brief Tests the dsp interface.
  *
  *  @author Thomas Quintana (quintana.thomas@gmail.com)
@@ -28,9 +28,9 @@
 #include <cstdlib>
 #include <gtest/gtest.h>
 
-#include "../src/dsp.h"
+#include "../src/vector.h"
 
-TEST(dsp_tests, dsp_vector_add_64) {
+TEST(vector_tests, vector_add_64) {
   /* Allocate properly aligned memory for the test vectors. */
   float *memory = (float*)aligned_alloc(32, sizeof(float) * 64 * 3);
   if (memory) {
@@ -43,7 +43,7 @@ TEST(dsp_tests, dsp_vector_add_64) {
       b[idx] = 1.0;
     }
     /* Add both vectors. */
-    dsp_vec_add_64(a, b, c);
+    vec_add_64(a, b, c);
     /* Check the results. */
     for (unsigned int idx = 0; idx < 64; idx++) {
       ASSERT_EQ(c[idx], 2.0);
@@ -52,7 +52,7 @@ TEST(dsp_tests, dsp_vector_add_64) {
   free(memory);
 }
 
-TEST(dsp_tests, dsp_vector_copy_16) {
+TEST(vector_tests, vector_copy_16) {
   /* Allocate properly aligned memory for the test vectors. */
   float *memory = (float*)aligned_alloc(32, sizeof(float) * 64 * 2);
   if (memory) {
@@ -63,10 +63,10 @@ TEST(dsp_tests, dsp_vector_copy_16) {
       a[idx] = (double)idx;
     }
     /* Add both vectors. */
-    dsp_vec_copy_16(a, b);
-    dsp_vec_copy_16(&a[16], &b[16]);
-    dsp_vec_copy_16(&a[32], &b[32]);
-    dsp_vec_copy_16(&a[48], &b[48]);
+    vec_copy_16(a, b);
+    vec_copy_16(&a[16], &b[16]);
+    vec_copy_16(&a[32], &b[32]);
+    vec_copy_16(&a[48], &b[48]);
     /* Check the results. */
     for (unsigned int idx = 0; idx < 64; idx++) {
       ASSERT_EQ(b[idx], a[idx]);
@@ -75,7 +75,7 @@ TEST(dsp_tests, dsp_vector_copy_16) {
   free(memory);
 }
 
-TEST(dsp_tests, dsp_vector_multiply_64) {
+TEST(vector_tests, vector_multiply_64) {
   /* Allocate properly aligned memory for the test vectors. */
   float *memory = (float*)aligned_alloc(32, sizeof(float) * 64 * 3);
   if (memory) {
@@ -88,7 +88,7 @@ TEST(dsp_tests, dsp_vector_multiply_64) {
       b[idx] = 3.0;
     }
     /* Multiply both vectors. */
-    dsp_vec_mul_64(a, b, c);
+    vec_mul_64(a, b, c);
     /* Check the results. */
     for (unsigned int idx = 0; idx < 64; idx++) {
       ASSERT_EQ(c[idx], 6.0);
@@ -97,7 +97,7 @@ TEST(dsp_tests, dsp_vector_multiply_64) {
   free(memory);
 }
 
-TEST(dsp_tests, dsp_vector_sqrt_64) {
+TEST(vector_tests, vector_sqrt_64) {
   /* Allocate properly aligned memory for the test vector. */
   float *memory = (float*)aligned_alloc(32, sizeof(float) * 64 * 2);
   if (memory) {
@@ -108,7 +108,7 @@ TEST(dsp_tests, dsp_vector_sqrt_64) {
       a[idx] = 9.0;
     }
     /* Square vector a. */
-    dsp_vec_sqrt_64(a, b);
+    vec_sqrt_64(a, b);
     /* Check the results. */
     for (unsigned int idx = 0; idx < 64; idx++) {
       ASSERT_EQ(b[idx], 3.0);
@@ -117,7 +117,7 @@ TEST(dsp_tests, dsp_vector_sqrt_64) {
   free(memory);
 }
 
-TEST(dsp_tests, dsp_vector_square_64) {
+TEST(vector_tests, vector_square_64) {
   /* Allocate properly aligned memory for the test vector. */
   float *memory = (float*)aligned_alloc(32, sizeof(float) * 64 * 2);
   if (memory) {
@@ -128,7 +128,7 @@ TEST(dsp_tests, dsp_vector_square_64) {
       a[idx] = 3.0;
     }
     /* Square vector a. */
-    dsp_vec_square_64(a, b);
+    vec_square_64(a, b);
     /* Check the results. */
     for (unsigned int idx = 0; idx < 64; idx++) {
       ASSERT_EQ(b[idx], 9.0);

@@ -18,8 +18,8 @@
  */
 
 /** @file spectrograph.h
- *  @brief Public type and function definitions used for
- *         generating spectrograms.
+ *  @brief Public functions, macros and type definitions used for
+ *         generating log power spectrums.
  *
  *  @author Thomas Quintana (quintana.thomas@gmail.com)
  *  @bug No known bugs.

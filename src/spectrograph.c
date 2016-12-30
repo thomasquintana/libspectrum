@@ -34,6 +34,7 @@
 /* Spectrograph Run-time */
 #include "dsp.h"
 #include "spectrograph.h"
+#include "vector.h"
 
 typedef struct spectrograph {
   float              *constant_buffers;
@@ -116,7 +117,7 @@ spectrograph_t* spectrograph_create(void) {
   sg->hann_wnd = constant_buffers;
   sg->power_spec_coeff = &constant_buffers[128];
   for (unsigned int idx = 0; idx < 128; idx++) {
-    sg->hann_wnd[idx] = dsp_hann_wnd(idx, 128);
+    sg->hann_wnd[idx] = hann_func(idx, 128);
     sg->power_spec_coeff[idx] = 0.0078125f;
   }
   unsigned int work_buffer_size = sizeof(float) * 128 * 3;
@@ -142,17 +143,17 @@ void spectrograph_destroy(spectrograph_t *sg) {
 
 bool spectrograph_transform(spectrograph_t *sg, float *input, float *output) {
   float *buffer = sg->work_buffers;
-  dsp_vec_copy_16(input, buffer);
-  dsp_vec_copy_16(&input[16], &buffer[16]);
-  dsp_vec_copy_16(&input[32], &buffer[32]);
-  dsp_vec_copy_16(&input[48], &buffer[48]);
-  dsp_vec_copy_16(&input[64], &buffer[64]);
-  dsp_vec_copy_16(&input[80], &buffer[80]);
-  dsp_vec_copy_16(&input[96], &buffer[96]);
-  dsp_vec_copy_16(&input[112], &buffer[112]);
+  vec_copy_16(input, buffer);
+  vec_copy_16(&input[16], &buffer[16]);
+  vec_copy_16(&input[32], &buffer[32]);
+  vec_copy_16(&input[48], &buffer[48]);
+  vec_copy_16(&input[64], &buffer[64]);
+  vec_copy_16(&input[80], &buffer[80]);
+  vec_copy_16(&input[96], &buffer[96]);
+  vec_copy_16(&input[112], &buffer[112]);
   /* Apply the hanning window to the input frame. */
-  dsp_vec_mul_64(sg->hann_wnd, buffer, buffer);
-  dsp_vec_mul_64(&sg->hann_wnd[64], &buffer[64], &buffer[64]);
+  vec_mul_64(sg->hann_wnd, buffer, buffer);
+  vec_mul_64(&sg->hann_wnd[64], &buffer[64], &buffer[64]);
   /* Perform the FFT */
   memset(sg->fft_input_buffer, 0, sizeof(Ipp32fc) * 128);
   for (unsigned int idx = 0; idx < 128; idx++) {
@@ -170,13 +171,13 @@ bool spectrograph_transform(spectrograph_t *sg, float *input, float *output) {
     imag[idx] = sg->fft_output_buffer[idx].im;
   }
   /* Compute the magnitude spectrum. */
-  dsp_vec_square_64(real, real);
-  dsp_vec_square_64(imag, imag);
-  dsp_vec_add_64(real, imag, buffer);
-  dsp_vec_sqrt_64(buffer, buffer);
+  vec_square_64(real, real);
+  vec_square_64(imag, imag);
+  vec_add_64(real, imag, buffer);
+  vec_sqrt_64(buffer, buffer);
   /* Compute the power spectrum. */
-  dsp_vec_square_64(buffer, buffer);
-  dsp_vec_mul_64(buffer, sg->power_spec_coeff, buffer);
+  vec_square_64(buffer, buffer);
+  vec_mul_64(buffer, sg->power_spec_coeff, buffer);
   /* Handle the final sample. */
   buffer[64] = sqrtf(real[64] * real[64] + imag[64] * imag[64]);
   buffer[64] *= buffer[64];
