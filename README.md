@@ -13,6 +13,16 @@ A library to generate partial and/or complete log power spectrums of an input si
 sudo apt-get install -y build-essential binutils g++ gcc scons
 ```
 
+#### Install Google Test Framework
+
+```
+$] sudo apt-get install -y libgtest-dev
+$] cd /usr/src/gtest
+$] sudo cmake CMakeLists.txt
+$] sudo make
+$] sudo cp *.a /usr/lib
+```
+
 #### Install Intel Performance Primitives Library
 
 The libspectrum library uses the [Intel Performance Primitives Library](https://software.intel.com/en-us/intel-ipp). When installing this library make sure the install path is changed to `/var/lib/intel`. If the library is installed to a different location then the `IPP_INCLUDEPATH` and `IPP_LIBPATH` variables have to be updated in the `SConstruct` file located in the the project's root folder.

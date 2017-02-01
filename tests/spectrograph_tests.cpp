@@ -31,7 +31,7 @@
 
 #include "../src/spectrograph.h"
 
-/* Generate a 1Khz sine wave @ 8Khz. */
+/* Generate a 1Khz sine wave sampled @ 8Khz. */
 #define SINE_WAVE_GEN(N) ((short)(16384 * sin((2 * M_PI * N * 1000) / 8000)))
 
 float SINE_WAVE_SPECTRUM[] = {
