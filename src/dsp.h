@@ -33,6 +33,8 @@
  *
  * @param n The index at time t.
  * @param N The number of samples per frame.
+ *
+ * Return The result of the Hann function.
  */
 #define hann_func(n, N) (0.5 * (1 - cos((2 * M_PI * (n)) / ((N) - 1))))
 

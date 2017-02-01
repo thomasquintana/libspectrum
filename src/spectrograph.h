@@ -35,6 +35,8 @@
  * Compute the output length of a spectrograph.
  *
  * @param n_samples The number of samples per frame.
+ *
+ * @return The spectrograph output length.
  */
 #define spectrograph_output_len(n_samples) ((int)(floor((n_samples) / 2) + 1))
 
