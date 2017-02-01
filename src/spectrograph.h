@@ -56,7 +56,7 @@ typedef struct spectrograph spectrograph_t;
 /**
  * Create a new spectrograph.
  *
- * @return A pointer to a new spectrograph.
+ * @return A new spectrograph.
  */
 spectrograph_t* spectrograph_create(void);
 
